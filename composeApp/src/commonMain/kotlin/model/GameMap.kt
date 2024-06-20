@@ -1,10 +1,15 @@
 package model
 
-import androidx.compose.ui.graphics.Color
-import kotlin.random.Random
+import kotlinx.serialization.Serializable
 
-class GameMap (
+@Serializable
+data class GameMap (
     val sizeX: Int = 24,
     val sizeY: Int = 24,
-    val mapNodes : Array<Array<MapNode>> = Array(sizeX) { Array(sizeY) { MapNode(color = Color(Random.nextInt(), Random.nextInt(), Random.nextInt())) } }
+    val nodes : List<List<MapNode>> =
+        List(sizeX) { x ->
+            List(sizeY) { y ->
+                MapNode(x = x, y = y)
+            }
+        }
 )
