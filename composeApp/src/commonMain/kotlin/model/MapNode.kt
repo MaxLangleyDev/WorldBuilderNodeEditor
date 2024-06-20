@@ -1,10 +1,12 @@
 package model
 
-import androidx.compose.ui.graphics.Color
+import kotlinx.serialization.Serializable
 
-class MapNode(
+@Serializable
+data class MapNode(
     val name: String = "",
+    val x: Int = 0,
+    val y: Int = 0,
     val traversable: Boolean = false,
-    val color: Color = Color.White
-) {
-}
+    val colorHex: Int = 0xFF000000.toInt(),
+)
