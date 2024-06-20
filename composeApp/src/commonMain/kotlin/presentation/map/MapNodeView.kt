@@ -1,4 +1,4 @@
-package presentation
+package presentation.map
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
