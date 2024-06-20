@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.GameMap
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import presentation.MapViewer
 
 @Composable
 @Preview
@@ -18,23 +19,8 @@ fun App() {
 
         val map = GameMap()
 
-        Column {
-            for (x in 0..<map.sizeX) {
-                Row {
-                    for (y in 0..<map.sizeY) {
-                        Column(
-                            modifier = Modifier.padding(3.dp)
-                        ){
-                            Box(
-                                modifier = Modifier.size(30.dp)
-                                    .background(map.mapNodes[x][y].color)
+        MapViewer(map = map)
 
-                            )
-                        }
-                    }
-                }
-            }
-        }
 
     }
 }
