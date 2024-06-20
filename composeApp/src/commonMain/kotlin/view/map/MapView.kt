@@ -89,7 +89,7 @@ fun MapView(
                         Column(
                             modifier = Modifier.padding(3.dp)
                         ) {
-                            MapNodeView(mapNode = map.mapNodes[x][y])
+                            MapNodeView(mapNode = map.nodes[x][y])
                         }
                     }
                 }
