@@ -28,5 +28,5 @@ fun EditorScreen(
         }
 
     }
-    
+
 }
