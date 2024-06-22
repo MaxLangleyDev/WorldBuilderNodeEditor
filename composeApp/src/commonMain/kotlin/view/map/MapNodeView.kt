@@ -16,6 +16,6 @@ fun MapNodeView(
 ){
     Box(
         modifier = modifier
-            .background(Color(mapNode.colorHex))
+//            .background(Color(mapNode.colorHex))
     )
 }
