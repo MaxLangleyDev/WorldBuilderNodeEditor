@@ -70,16 +70,20 @@ fun MapView(
                             isDragging = false
                         },
                         onDrag = { change, _ ->
-                            if (isDragging) {// Update selected nodes based on current pointer position
+                            if (isDragging) {
+
 //                                val verticalScrollOffset = verticalScrollState.value.toFloat()
 //                                val horizontalScrollOffset = horizontalScrollState.value.toFloat()
 
-                                selectedIndices.clear()
+//                                selectedIndices.clear()
 
                                 currentDragPosition = change.position
+
                                 val brushTopLeft =
                                     currentDragPosition - Offset(brushSize / 2, brushSize / 2)
+
                                 val brushBottomRight = brushTopLeft + Offset(brushSize, brushSize)
+
                                 val brushArea = Rect(
                                     left = brushTopLeft.x,
                                     top = brushTopLeft.y,
@@ -96,7 +100,7 @@ fun MapView(
                         }
                     )
                 }
-                .clipToBounds()
+
         ) {
 
             // Draw the map nodes
@@ -111,6 +115,7 @@ fun MapView(
                                     .size(30.dp)
                                     .onGloballyPositioned {
                                             coordinates ->
+                                        
                                         val rect = Rect(
                                             coordinates.positionInRoot().x,
                                             coordinates.positionInRoot().y,
