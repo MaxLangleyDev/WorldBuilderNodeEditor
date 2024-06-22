@@ -39,8 +39,8 @@ fun MapView(
     modifier: Modifier = Modifier,
     mapEditorState: MapEditorState = MapEditorState(),
 ) {
-//    val horizontalScrollState = rememberScrollState()
-//    val verticalScrollState = rememberScrollState()
+    val horizontalScrollState = rememberScrollState()
+    val verticalScrollState = rememberScrollState()
 
     var isDragging by remember { mutableStateOf(false) }
     var brushSize by remember { mutableStateOf(32f) }
@@ -55,8 +55,8 @@ fun MapView(
         Column(
             modifier =
             Modifier
-//                .verticalScroll(verticalScrollState)
-//                .horizontalScroll(horizontalScrollState)
+                .verticalScroll(verticalScrollState)
+                .horizontalScroll(horizontalScrollState)
                 .pointerInput(Unit) {
                     detectDragGestures(
                         onDragStart = { offset ->
@@ -72,15 +72,14 @@ fun MapView(
                         onDrag = { change, _ ->
                             if (isDragging) {
 
-//                                val verticalScrollOffset = verticalScrollState.value.toFloat()
-//                                val horizontalScrollOffset = horizontalScrollState.value.toFloat()
-
-//                                selectedIndices.clear()
+                                val verticalScrollOffset = verticalScrollState.value.toFloat()
+                                val horizontalScrollOffset = horizontalScrollState.value.toFloat()
+                                
 
                                 currentDragPosition = change.position
 
                                 val brushTopLeft =
-                                    currentDragPosition - Offset(brushSize / 2, brushSize / 2)
+                                    currentDragPosition - Offset(brushSize / 2, brushSize / 2) - Offset(horizontalScrollOffset, verticalScrollOffset)
 
                                 val brushBottomRight = brushTopLeft + Offset(brushSize, brushSize)
 
@@ -123,7 +122,18 @@ fun MapView(
                                             coordinates.positionInRoot().y + coordinates.size.height
                                         )
 
-                                        nodePositions.add((x to y) to rect)
+                                        val newPair = (x to y) to rect
+
+                                        for (pair in nodePositions){
+
+                                            if (pair.first == newPair.first){
+                                                nodePositions.remove(pair)
+                                                break
+                                            }
+
+                                        }
+
+                                        nodePositions.add(newPair)
                                     }
                                     .background(if ((Pair(x, y)) in selectedIndices) Color.Red else Color.Blue),
                                 mapNode = mapEditorState.map.nodes[x][y]
@@ -136,14 +146,14 @@ fun MapView(
 
         // Render the brush rectangle if dragging
         if (isDragging) {
-//            val verticalScrollOffset = verticalScrollState.value.toFloat()
-//            val horizontalScrollOffset = horizontalScrollState.value.toFloat()
+            val verticalScrollOffset = verticalScrollState.value.toFloat()
+            val horizontalScrollOffset = horizontalScrollState.value.toFloat()
 
             Canvas(modifier = Modifier.fillMaxSize()) {
                 drawRect(
                     color = Color.Gray.copy(alpha = 0.5f),
                     topLeft = currentDragPosition
-                            - Offset(brushSize / 2, brushSize / 2),
+                            - Offset(brushSize / 2, brushSize / 2) - Offset(horizontalScrollOffset, verticalScrollOffset),
                     size = Size(brushSize, brushSize),
                     style = Stroke(width = 2.dp.toPx())
                 )
