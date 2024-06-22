@@ -24,7 +24,7 @@ fun EditorScreen(
         Row(
             modifier.weight(0.7f).fillMaxWidth()
         ){
-            MapView(map = state.map)
+            MapView(mapEditorState = state)
         }
 
     }
