@@ -102,9 +102,9 @@ fun MapView(
         ) {
 
             // Draw the map nodes
-            for (x in 0..<mapEditorState.map.sizeX) {
+            for (y in 0..<mapEditorState.map.sizeY) {
                 Row {
-                    for (y in 0..<mapEditorState.map.sizeY) {
+                    for (x in 0..<mapEditorState.map.sizeX) {
                         Column(
                             modifier = Modifier.padding(3.dp)
                         ) {
@@ -138,7 +138,7 @@ fun MapView(
                                     .clickable{
                                         selectedIndices.add(Pair(x, y))
                                     },
-                                mapNode = mapEditorState.map.nodes[x][y]
+                                mapNode = mapEditorState.map.nodes[y][x]
                             )
                         }
                     }
