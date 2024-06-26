@@ -2,7 +2,9 @@ package view.map
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,9 +12,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.onClick
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -20,7 +22,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
@@ -30,9 +31,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.unit.dp
-import model.GameMap
 import model.MapEditorState
-import model.MapNode
 
 @Composable
 fun MapView(
@@ -74,7 +73,7 @@ fun MapView(
 
                                 val verticalScrollOffset = verticalScrollState.value.toFloat()
                                 val horizontalScrollOffset = horizontalScrollState.value.toFloat()
-                                
+
 
                                 currentDragPosition = change.position
 
@@ -135,7 +134,10 @@ fun MapView(
 
                                         nodePositions.add(newPair)
                                     }
-                                    .background(if ((Pair(x, y)) in selectedIndices) Color.Red else Color.Blue),
+                                    .background(if ((Pair(x, y)) in selectedIndices) Color.Red else Color.Blue)
+                                    .clickable{
+                                        selectedIndices.add(Pair(x, y))
+                                    },
                                 mapNode = mapEditorState.map.nodes[x][y]
                             )
                         }
