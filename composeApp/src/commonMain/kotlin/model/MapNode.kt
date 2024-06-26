@@ -5,6 +5,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MapNode(
     val name: String = "",
+    val type: String = "",
+    val description: String = "",
 
     val x: Int = 0,
     val y: Int = 0,
