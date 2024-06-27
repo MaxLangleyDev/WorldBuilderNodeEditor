@@ -4,9 +4,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import view.EditorScreen
-import view.map.MapView
 import theme.MapEditorTheme
+import view.EditorScreen
 
 @Composable
 @Preview
