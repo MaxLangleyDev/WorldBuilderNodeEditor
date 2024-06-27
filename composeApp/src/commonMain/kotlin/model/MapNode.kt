@@ -24,5 +24,9 @@ data class MapNode(
         "w" to true,
     ),
 
+    val events: List<GameEvent> = emptyList(),
+
+    
+
     val colorHex: Int = 0xFF000000.toInt(),
 )
