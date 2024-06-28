@@ -10,4 +10,7 @@ data class GameCharacter(
     val image : String = "",
     val gender : String = "",
     val rpgClass : String = "",
+    val titles : List<String> = emptyList(),
+    val currentTitle : String = "",
+    val currentLocation : String = "",
 )
