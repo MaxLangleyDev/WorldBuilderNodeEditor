@@ -12,5 +12,10 @@ data class GameCharacter(
     val rpgClass : String = "",
     val titles : List<String> = emptyList(),
     val currentTitle : String = "",
-    val currentLocation : String = "",
+    val coordinates : Pair<Int, Int> = Pair(0, 0),
+
+    val stats : CharacterStats = CharacterStats(),
+
+    val inventory : List<String> = emptyList(),
+    val equippedItems : List<String> = emptyList(),
 )
