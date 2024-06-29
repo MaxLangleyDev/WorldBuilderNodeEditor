@@ -1,4 +1,4 @@
-package model
+package model.characters
 
 import kotlinx.serialization.Serializable
 
