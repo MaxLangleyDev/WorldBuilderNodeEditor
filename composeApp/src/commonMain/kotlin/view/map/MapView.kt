@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -30,11 +31,13 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.unit.dp
 import model.MapEditorState
+import model.gameMap.MapNode
 
 @Composable
 fun MapView(
     modifier: Modifier = Modifier,
     mapEditorState: MapEditorState = MapEditorState(),
+    onAddSelectedNode: (MapNode) -> Unit = {},
 ) {
     val horizontalScrollState = rememberScrollState()
     val verticalScrollState = rememberScrollState()
@@ -45,6 +48,7 @@ fun MapView(
 
     var selectedIndices = remember { mutableStateListOf<Pair<Int, Int>>() }
     val nodePositions = remember { mutableStateListOf<Pair< Pair<Int, Int>, Rect >>() }
+
 
     Box(
         modifier = modifier
@@ -92,6 +96,7 @@ fun MapView(
                                         brushArea.overlaps(rect)
                                     }.map { it.first }
                                 )
+
                             }
                         }
                     )
@@ -135,6 +140,7 @@ fun MapView(
                                     .background(if ((Pair(x, y)) in selectedIndices) Color.Red else Color.Blue)
                                     .clickable{
                                         selectedIndices.add(Pair(x, y))
+                                        onAddSelectedNode(mapEditorState.map.nodes[y][x])
                                     },
                                 mapNode = mapEditorState.map.nodes[y][x]
                             )
