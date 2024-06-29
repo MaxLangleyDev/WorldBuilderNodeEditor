@@ -24,7 +24,17 @@ fun EditorScreen(
         Row(
             modifier.weight(0.7f).fillMaxWidth()
         ){
-            MapView(mapEditorState = state)
+            MapView(
+                modifier = Modifier.weight(0.7f),
+                mapEditorState = state,
+                onAddSelectedNode = viewModel::addSelectedNode
+            )
+
+            NodeEditor(
+                modifier = Modifier.weight(0.3f),
+                gameMap = state.map,
+                selectedNodes = state.selectedNodes ?: emptyList()
+            )
         }
 
     }
